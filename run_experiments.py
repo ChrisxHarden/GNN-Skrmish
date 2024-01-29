@@ -21,11 +21,15 @@ from multiprocessing.pool import ThreadPool
 
 
 N_PROCS = 2     #multiprocessing.cpu_count() // 2
+# N_PROCS=multiprocessing.cpu_count() // 2
 N_SEEDS = 10
 START_SEED = 0
 
 # read experiments.json
-with open("configs/experiments/experiments.json", "r") as f:
+# with open("configs/experiments/experiments.json", "r") as f:
+# with open("configs/experiments/experiments_OPTskirmish.json", "r") as f:
+with open("configs/experiments/experiments_skirmish.json", "r") as f:
+
     experiments = json.load(f)
 
 # turn experiments in json into cmdline commands
