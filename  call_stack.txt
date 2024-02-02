@@ -1,0 +1,10 @@
+(RolloutWorker pid=2633947) Function '<module>' called from file '/home/ezhao/miniconda3/envs/ict/lib/python3.9/site-packages/ray/_private/workers/default_worker.py' at line 237
+(RolloutWorker pid=2633947) Function 'main_loop' called from file '/home/ezhao/miniconda3/envs/ict/lib/python3.9/site-packages/ray/_private/worker.py' at line 756
+(RolloutWorker pid=2633947) Function 'actor_method_executor' called from file '/home/ezhao/miniconda3/envs/ict/lib/python3.9/site-packages/ray/_private/function_manager.py' at line 674
+(RolloutWorker pid=2633947) Function '_resume_span' called from file '/home/ezhao/miniconda3/envs/ict/lib/python3.9/site-packages/ray/util/tracing/tracing_helper.py' at line 466
+(RolloutWorker pid=2633947) Function 'sample' called from file '/home/ezhao/miniconda3/envs/ict/lib/python3.9/site-packages/ray/rllib/evaluation/rollout_worker.py' at line 806
+(RolloutWorker pid=2633947) Function 'next' called from file '/home/ezhao/miniconda3/envs/ict/lib/python3.9/site-packages/ray/rllib/evaluation/sampler.py' at line 92
+(RolloutWorker pid=2633947) Function 'get_data' called from file '/home/ezhao/miniconda3/envs/ict/lib/python3.9/site-packages/ray/rllib/evaluation/sampler.py' at line 282
+(RolloutWorker pid=2633947) Function '_env_runner' called from file '/home/ezhao/miniconda3/envs/ict/lib/python3.9/site-packages/ray/rllib/evaluation/sampler.py' at line 734
+(RolloutWorker pid=2633947) Function 'send_actions' called from file '/home/ezhao/miniconda3/envs/ict/lib/python3.9/site-packages/ray/rllib/env/multi_agent_env.py' at line 565
+(RolloutWorker pid=2633947) Function 'step' called from file '/home/ezhao/code/GNNsAsEnvs/sigma_graph/envs/figure8/figure8_squad_rllib.py' at line 52

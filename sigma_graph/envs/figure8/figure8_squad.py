@@ -78,6 +78,13 @@ class Figure8Squad(gym.Env):
         #for idx in range(len(self.team_blue)):
         #    print(idx, self.team_blue[idx].agent_node)
         # store previous state for logging if logger is 'on'
+                
+        # import traceback
+        # stack = traceback.extract_stack()
+        # for frame in stack[:-1]:  # Exclude the last frame (current function)
+        #     print(f"Function '{frame.name}' called from file '{frame.filename}' at line {frame.lineno}")
+        
+        
         prev_obs = self._log_step_prev()
         self.step_counter += 1
 

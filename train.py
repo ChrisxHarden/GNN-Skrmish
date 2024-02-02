@@ -124,6 +124,7 @@ def create_trainer_config(
     GRAPH_OBS_TOKEN = {
         "embed_opt": inner_configs.embed_opt,
         "embed_dir": inner_configs.embed_dir,
+        "naughty": inner_configs.naughty,
     }
 
     # set model defaults
@@ -219,6 +220,8 @@ def run_baselines(
     torch.manual_seed(SEED)
     outer_configs, _ = create_env_config(config)
 
+
+
     # train
     env = ScoutMissionStdRLLib if "scout" in custom_model else Figure8SquadRLLib
     ppo_config = create_trainer_config(
@@ -229,6 +232,9 @@ def run_baselines(
     )
     train(ppo_trainer_custom, config.name, train_time, checkpoint_models, ppo_config)
 
+
+    # from showcallstack import showcallstack
+    # showcallstack()
 
 # parse arguments
 def parse_arguments():
@@ -395,7 +401,7 @@ def parse_arguments():
         "--embed_opt", type=bool, default=False, help="embed graph optimization"
     )
     parser.add_argument("--embed_dir", type=bool, default=True, help="embed agent dirs")
-
+    parser.add_argument("--naughty",type=bool, default=False,help="revert the heuristic suggested action on node 6,12,19")
     # testing config
     parser.add_argument(
         "--policy_file",

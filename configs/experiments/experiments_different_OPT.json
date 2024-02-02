@@ -1,0 +1,183 @@
+{
+
+    "GCN_5hp_NOOPT": {
+        "init_health": 5,
+        "model": "gnn",
+        "is_hybrid": true,
+        "conv_type": "gcn",
+        "aggregation_fn": "local",
+        "train_time":200,
+        "embed_opt": true,
+        "hidden_size": 169
+    },
+
+
+
+
+    "GCN_5hp_OPT": {
+        "init_health": 5,
+        "model": "gnn",
+        "is_hybrid": true,
+        "conv_type": "gcn",
+        "aggregation_fn": "local",
+        "train_time":200,
+
+        "embed_opt": true,
+        "hidden_size": 169
+    },
+
+
+    "GCN_5hp_OPT_naughty": {
+        "init_health": 5,
+        "model": "gnn",
+        "is_hybrid": true,
+        "conv_type": "gcn",
+        "aggregation_fn": "local",
+        "train_time":200,
+
+        "embed_opt": true,
+        "hidden_size": 169,
+        "naughty":true
+},
+
+
+
+
+
+    "GCN_2hp_NOOPT": {
+        "init_health": 2,
+        "model": "gnn",
+        "is_hybrid": true,
+        "conv_type": "gcn",
+        "aggregation_fn": "local",
+        "train_time":200,
+
+        "embed_opt": true,
+        "hidden_size": 169
+    },
+
+
+
+
+    "GCN_2hp_OPT": {
+        "init_health": 2,
+        "model": "gnn",
+        "is_hybrid": true,
+        "conv_type": "gcn",
+        "aggregation_fn": "local",
+        "train_time":200,
+
+        "embed_opt": true,
+        "hidden_size": 169
+    },
+
+
+    "GCN_2hp_OPT_naughty": {
+        "init_health": 2,
+        "model": "gnn",
+        "is_hybrid": true,
+        "conv_type": "gcn",
+        "aggregation_fn": "local",
+        "train_time":200,
+
+        "embed_opt": true,
+        "hidden_size": 169,
+        "naughty":true
+    },
+
+
+    "GCN_20hp_NOOPT": {
+        "init_health": 20,
+        "model": "gnn",
+        "is_hybrid": true,
+        "conv_type": "gcn",
+        "aggregation_fn": "local",
+        "train_time":200,
+
+        "embed_opt": true,
+        "hidden_size": 169
+    },
+
+
+
+
+    "GCN_20hp_OPT": {
+        "init_health": 20,
+        "model": "gnn",
+        "is_hybrid": true,
+        "conv_type": "gcn",
+        "aggregation_fn": "local",
+        "train_time":200,
+
+        "embed_opt": true,
+        "hidden_size": 169
+    },
+
+
+    "GCN_20hp_OPT_naughty": {
+        "init_health": 20,
+        "model": "gnn",
+        "is_hybrid": true,
+        "conv_type": "gcn",
+        "aggregation_fn": "local",
+        "train_time":200,
+
+        "embed_opt": true,
+        "hidden_size": 169,
+        "naughty":true
+    },
+
+
+
+
+    "GCN_5hp_2r2b_NOOPT": {
+        "n_red": 2,
+        "n_blue": 2,
+        "init_health": 5,
+        "model": "gnn",
+        "is_hybrid": true,
+        "conv_type": "gcn",
+        "aggregation_fn": "local",
+        "train_time":200,
+
+        "embed_opt": true,
+        "hidden_size": 169
+    },
+
+
+
+
+    "GCN_5hp_2r2b_OPT": {
+        "n_red": 2,
+        "n_blue": 2,
+        "init_health": 5,
+        "model": "gnn",
+        "is_hybrid": true,
+        "conv_type": "gcn",
+        "aggregation_fn": "local",
+        "train_time":200,
+
+        "embed_opt": true,
+        "hidden_size": 169
+    },
+
+
+    "GCN_2hp_2r2b_OPT_naughty": {
+        "n_red": 2,
+        "n_blue": 2,
+        "init_health": 5,
+        "model": "gnn",
+        "is_hybrid": true,
+        "conv_type": "gcn",
+        "aggregation_fn": "local",
+        "train_time":200,
+
+        "embed_opt": true,
+        "hidden_size": 169,
+        "naughty":true
+    }
+
+
+
+
+}

@@ -16,6 +16,7 @@ from torch_geometric.nn.aggr import Aggregation
 import torch_geometric.nn.aggr as aggr
 import torch_geometric.nn.pool as pool
 from typing import List
+import random
 
 
 # constants/helper functions
@@ -37,6 +38,7 @@ GRAPH_OBS_TOKEN = {
     "embed_pos": False,
     "embed_dir": True,
     "embed_opt": True,
+    "naughty":False,
 }
 NODE_EMBED_SIZE = (
     GRAPH_OBS_TOKEN["embedding_size"]
@@ -122,6 +124,7 @@ def efficient_embed_obs_in_map(obs: torch.Tensor, map: Fig8MapInfo, obs_shapes=N
         ...]
     """
     # initialize node embeddings tensor
+    
     global SUPPRESS_WARNINGS
     pos_obs_size = map.get_graph_size()
     batch_size = len(obs)
@@ -129,7 +132,7 @@ def efficient_embed_obs_in_map(obs: torch.Tensor, map: Fig8MapInfo, obs_shapes=N
     move_map = create_move_map(map.g_acs)
 
     # embed x,y
-    if GRAPH_OBS_TOKEN["embed_pos"]:
+    if GRAPH_OBS_TOKEN["embed_pos"]:# not used in gcn
         pos_emb = torch.zeros(pos_obs_size+1, 2) # x,y coordinates
         for i in range(pos_obs_size):
             pos_emb[i,:] = torch.FloatTensor(map.n_info[i + 1])
@@ -162,6 +165,18 @@ def efficient_embed_obs_in_map(obs: torch.Tensor, map: Fig8MapInfo, obs_shapes=N
         
         # agent_is_here
         red_node = get_loc(self_obs, pos_obs_size)
+        # print(f"red_node's index:{red_node}")
+        
+        revert_node=[6,12,19] #only 2 possible actions
+
+        # if i==0:
+        #     for node in range(27):
+        #         name=map.get_name_by_index(node+1)
+        #         validated_action=map.get_actions_by_node(name)
+        #         print(f"possible actions on node {node} are {validated_action}")
+        #         print("\n")
+
+
         if red_node == -1:
             print(ERROR_MSG("agent not found"))
         node_embeddings[i][red_node][0] = 1
@@ -208,11 +223,32 @@ def efficient_embed_obs_in_map(obs: torch.Tensor, map: Fig8MapInfo, obs_shapes=N
         # add feature from some external "optimization", if desired
         if GRAPH_OBS_TOKEN["embed_opt"]:
             if OPT_SETTINGS["flanking"]: # use the "flanking" optimization
-                node_embeddings[i][red_node][6:10] = flank_optimization(
+                heuristic_suggested_direction = flank_optimization(
                     map,
                     red_node,
                     blue_positions
                 )
+
+
+
+                if GRAPH_OBS_TOKEN["naughty"]:                
+                    if red_node in revert_node:# revert the action suggested by heuristic at certain nodes
+                        validated_actions=map.get_actions_by_node(map.get_name_by_index(red_node))
+                        not_suggested_actions=validated_actions.copy()
+
+                        if heuristic_suggested_direction in not_suggested_actions:
+                            not_suggested_actions.remove(heuristic_suggested_direction)
+                        
+                        
+                        heuristic_suggested_direction=random.choice(not_suggested_actions)
+
+                #transform to one-hot
+                if heuristic_suggested_direction!=0:
+                        node_embeddings[i][red_node][5+heuristic_suggested_direction]=1
+                
+            
+            
+            
             else: # no optimization given; defaulting to 0
                 if not SUPPRESS_WARNINGS["optimization_none"]:
                     print(ERROR_MSG("external optimization not provided. embedding \
@@ -221,6 +257,8 @@ def efficient_embed_obs_in_map(obs: torch.Tensor, map: Fig8MapInfo, obs_shapes=N
                     ))
                     SUPPRESS_WARNINGS["optimization_none"] = True
 
+    # print(f"This is the node_embedding (last one in the batch):\n{node_embeddings[-1]}")
+    # print(f"And this is it's shape{node_embeddings[-1].shape}")
     return node_embeddings.to(device)
 
 
@@ -538,6 +576,7 @@ def flank_optimization(
         last_node = curr_node
         curr_node = directions[curr_node]
     direction = move_map[red_location][last_node]
+    # print(f"The heuristic suggested direction is {type(direction)}")
     return direction
 
 

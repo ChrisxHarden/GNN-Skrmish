@@ -143,10 +143,23 @@ class GNNPolicy(TMv2.TorchModelV2, nn.Module):
         state: List[TensorType],
         seq_lens: TensorType,
     ):
+        
+        
+        # import traceback
+        # stack = traceback.extract_stack()
+        # for frame in stack[:-1]:  # Exclude the last frame (current function)
+        #     print(f"Function '{frame.name}' called from file '{frame.filename}' at line {frame.lineno}")
+
+
+
+        
         # transform obs to graph (for pyG, also do list[data]->torch_geometric.Batch)
         obs = input_dict["obs_flat"].float()
         x = utils.efficient_embed_obs_in_map(obs, self.map, self.obs_shapes)
         agent_nodes = [utils.get_loc(gx, self.map.get_graph_size()) for gx in obs]
+        # potential here
+        # print(f"x (the state embedding in the map) is: {x}")
+        # print(f"Agent nodes embedding (the state embedding in the map) is: {agent_nodes}")
         
         # inference
         for conv, norm in zip(self.gats, self.norms):
@@ -156,7 +169,6 @@ class GNNPolicy(TMv2.TorchModelV2, nn.Module):
         if self.is_hybrid:
             self._features = self._hiddens(torch.cat([self._features, obs], dim=1))
         logits = self._logits(self._features)
-
         # return
         self._last_flat_in = obs.reshape(obs.shape[0], -1)
         return logits, state
